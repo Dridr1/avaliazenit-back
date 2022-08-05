@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Avaliadores {
+  id         Int         @id @default(autoincrement())
+  nome       String      @unique
+  senha      String
+  avaliacoes Avaliacao[]
+
+  @@map("avaliadores")
+}
+
+model Candidatos {
+  id         Int         @id @default(autoincrement())
+  nome       String
+  avaliacoes Avaliacao[]
+
+  @@map("candidatos")
+}
+
+model Avaliacao {
+  id            Int         @id @default(autoincrement())
+  autor         Avaliadores @relation(fields: [avaliadorId], references: [id])
+  avaliadorId   Int
+  candidato     Candidatos  @relation(fields: [candidatoId], references: [id])
+  candidatoId   Int
+  orgIdeia      Int
+  TrabEquipe    Int
+  Lideranca     Int
+  Proatividade  Int
+  Criatividade  Int
+  JogoDeCintura Int
+  Oratoria      Int
+  Postura       Int
+  Seguranca     Int
+  Resiliencia   Int
+  Etica         Int
+  Atencao       Int
+  obseracoes    String
+
+  @@map("avaliacoes")
+}
