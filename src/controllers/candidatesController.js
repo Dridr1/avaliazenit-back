@@ -11,3 +11,12 @@ export const addNewCandidate = async (req, res) => {
         console.log(error);
     }
 };
+
+export const getCandidates = async (req, res) => {
+    try {
+        return res.send(await candidatesRepository.getAllCandidates()).status(200);
+    } catch (error) {
+        console.log(error);
+        return res.sendStatus(500);
+    }
+}
